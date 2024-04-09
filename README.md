@@ -8,6 +8,10 @@ Este projeto visa criar um simulador de dispositivos IoT que utiliza o protocolo
 
 https://github.com/Lemos1347/inteli-modulo-9-ponderada-5/assets/99190347/75959021-1469-4f7d-b168-1a49294fdaee
 
+### 2.1 Integração HiveMQ com Confluent Kafka
+
+<img width="1680" alt="Captura de Tela 2024-04-09 às 00 24 45" src="https://github.com/Lemos1347/inteli-modulo-9-ponderada-5/assets/99190347/2d8b775b-6bc4-4f2f-b6d3-6d7a473dc6a8">
+
 ## 3. Como Instalar e Rodar
 
 ### Pré-requisitos
