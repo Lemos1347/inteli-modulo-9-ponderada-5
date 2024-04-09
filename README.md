@@ -91,3 +91,19 @@ O projeto é composto por:
 
 ## 4. Testes 
 https://github.com/Lemos1347/inteli-modulo-9-ponderada-5/assets/99190347/d9ede3b5-cfda-4702-8bb5-c71125e47a0f
+
+Todos os testes podem ser encontrados na pasta [`tests`](./tests/). Para rodar os testes, basta executar o comando na root do projeto:
+
+```bash
+go test -v -cover ./...
+```
+
+> [!IMPORTANT]
+> Para rodar os testes, é necessário ter o arquivo `client.properties` com as credenciais do seu Confluent Kafka o seguitne arquivo dotenv na pasta `configs`:
+> `.env.test`
+> ```bash
+> BROKER_URL=YOUR_BROKER_URL
+> BROKER_USER=ponderada5-test-pub
+> BROKER_PASSWORD=ponderada5-test-pubPassword
+> PROPERTIES_FILE_PATH=../configs/client.properties
+> ```
