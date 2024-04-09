@@ -13,9 +13,9 @@ https://github.com/Lemos1347/inteli-modulo-9-ponderada-5/assets/99190347/7595902
 ### Pré-requisitos
 
 > [!IMPORTANT]
-> - Credenciais de um broker (HiveMQ)[https://www.hivemq.com/]
-> - Credenciais de um (Confluent Kafka)[https://www.confluent.io/cloud-kafka/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.brand_tp.prs_tgt.confluent-brand_mt.xct_rgn.latam_lng.eng_dv.all_con.confluent-kafka-general&utm_term=confluent%20kafka&creative=&device=c&placement=&gad_source=1&gclid=Cj0KCQjwq86wBhDiARIsAJhuphkrRGOZ_lDlLOz8C3bWHd4Cykwwn26xRC2PAxkOTi1efuqHSQ8vVRYaAi7LEALw_wcB]
-> - (Docker)[https://www.docker.com/] e (docker-compose)[https://docs.docker.com/compose/] instalado
+> - Credenciais de um broker [HiveMQ](https://www.hivemq.com/)
+> - Credenciais de um [Confluent Kafka](https://www.confluent.io/cloud-kafka/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.brand_tp.prs_tgt.confluent-brand_mt.xct_rgn.latam_lng.eng_dv.all_con.confluent-kafka-general&utm_term=confluent%20kafka&creative=&device=c&placement=&gad_source=1&gclid=Cj0KCQjwq86wBhDiARIsAJhuphkrRGOZ_lDlLOz8C3bWHd4Cykwwn26xRC2PAxkOTi1efuqHSQ8vVRYaAi7LEALw_wcB)
+> - [Docker](https://www.docker.com/) e [docker-compose](https://docs.docker.com/compose/) instalado
 > - [Golang](https://go.dev/doc/install) em sua máquina.
 
 ### Instalação
