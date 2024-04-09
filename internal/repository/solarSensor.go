@@ -175,7 +175,26 @@ func (s *SolarSensorRepo) emmitData(sensorId string, data string) {
 		panic(msgError)
 	}
 
-	s.mqttadapter.Publish("sensors/data", 1, false, jsonMsg)
+	s.mqttadapter.Publish("ponderada5/solarsensordata", 1, false, jsonMsg)
+}
+
+func (s *SolarSensorRepo) EmmitData(sensorId string, data string, topic string) *entity.SolarSensorData {
+	msg := entity.SolarSensorData{
+		SensorId:  sensorId,
+		Data:      data,
+		CreatedAt: time.Now(),
+	}
+
+	jsonMsg, err := json.Marshal(msg)
+
+	if err != nil {
+		msgError := fmt.Sprintf("Error when encoding: %#v\n", msg)
+		panic(msgError)
+	}
+
+	s.mqttadapter.Publish(topic, 1, false, jsonMsg)
+
+  return &msg
 }
 
 func (s *SolarSensorRepo) emulateSensor(sensor entity.SolarSensor) {

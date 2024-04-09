@@ -6,14 +6,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/Lemos1347/inteli-modulo-9-ponderada-5/internal/adapters/primary/mqtt"
+	"github.com/Lemos1347/inteli-modulo-9-ponderada-5/internal/adapters/primary/queue"
 	"github.com/Lemos1347/inteli-modulo-9-ponderada-5/internal/adapters/secondary/sensors"
 	"github.com/Lemos1347/inteli-modulo-9-ponderada-5/internal/domain/entity"
 	"github.com/Lemos1347/inteli-modulo-9-ponderada-5/internal/infra"
-	"github.com/Lemos1347/inteli-modulo-9-ponderada-5/internal/ports"
 	"github.com/google/uuid"
 
-	MQTT "github.com/eclipse/paho.mqtt.golang"
 	"github.com/joho/godotenv"
 )
 
@@ -31,14 +29,20 @@ func init() {
 	log.Println("ENV variables loaded!")
 }
 
-func createCallback(solarSensorDataAdapter ports.SolarSensorDataPort) MQTT.MessageHandler {
+func main() {
+	dbConnection := infra.NewDBConnection()
 
-	return func(_ MQTT.Client, msg MQTT.Message) {
-		log.Printf("Message received: %s", string(msg.Payload()))
+	solarSensorDataAdapter := sensors.NewSolarSensorDataAdapter(dbConnection)
+
+	kafkaConsumer := infra.GenerateKafkaConsumer()
+	queueAdapter := queue.NewMessageHandler(kafkaConsumer, []string{"ponderada5"})
+
+	callback := func(msg []byte) {
+		log.Printf("Message received: %s", string(msg))
 
 		var data entity.SolarSensorData
 
-		err := json.Unmarshal(msg.Payload(), &data)
+		err := json.Unmarshal(msg, &data)
 
 		if err != nil {
 			errMsg := fmt.Sprintf("Unable to decode json: %s\n", err.Error())
@@ -49,19 +53,9 @@ func createCallback(solarSensorDataAdapter ports.SolarSensorDataPort) MQTT.Messa
 
 		solarSensorDataAdapter.CreateNewData(&data)
 	}
-}
+	queueAdapter.ConsumeMessages(callback)
 
-func main() {
-	dbConnection := infra.NewDBConnection()
-
-	solarSensorDataAdapter := sensors.NewSolarSensorDataAdapter(dbConnection)
-
-	mqttClient := infra.GenerateMQTTClient()
-	mqttAdapter := mqtt.NewMQTTAdapter(mqttClient)
-
-	callback := createCallback(solarSensorDataAdapter)
-
-	mqttAdapter.Subscribe("sensors/data", callback)
+	// mqttAdapter.Subscribe("sensors/data", callback)
 
 	select {}
 }
